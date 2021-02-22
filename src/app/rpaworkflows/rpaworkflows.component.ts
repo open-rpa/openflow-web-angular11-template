@@ -9,7 +9,7 @@ import { NoderedUtil } from '@openiap/openflow-api';
 })
 export class RPAWorkflowsComponent implements OnInit {
   constructor(
-    public openflowAuthService: NgOpenflowAuthService    
+    public openflowAuthService: NgOpenflowAuthService
   ) { }
   ngOnInit(): void {
     this.openflowAuthService.onSignedin(async user => {
@@ -22,7 +22,7 @@ export class RPAWorkflowsComponent implements OnInit {
       if (!this.openflowAuthService.isSignedIn) { console.log("Not connected/signed in"); return; }
       const basequery:any = { "_type": "workflow" };
       const baseprojection: any = {_type: 1, type: 1, name: 1, _created: 1, _createdby: 1, _modified: 1, projectandname: 1};
-      this.entities = await NoderedUtil.Query("openrpa", basequery, baseprojection, null, 100, 0, null as any);
+      this.entities = await NoderedUtil.Query("openrpa", basequery, baseprojection, {_modified: -1}, 100, 0, null as any);
     } catch (error) {
       console.error(error);
     }

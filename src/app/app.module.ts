@@ -14,6 +14,7 @@ import { EntitiesComponent } from './entities/entities.component';
 import { UsersComponent } from './users/users.component';
 import { RPAWorkflowsComponent } from './rpaworkflows/rpaworkflows.component';
 import { InfiniteScrollModule } from '@thisissoon/angular-infinite-scroll';
+import { RPAWorkflowComponent } from './rpaworkflow/rpaworkflow.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { InfiniteScrollModule } from '@thisissoon/angular-infinite-scroll';
     MainComponent,
     EntitiesComponent,
     UsersComponent,
-    RPAWorkflowsComponent
+    RPAWorkflowsComponent,
+    RPAWorkflowComponent
   ],
   imports: [
     BrowserModule,

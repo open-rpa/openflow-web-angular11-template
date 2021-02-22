@@ -6,12 +6,16 @@
                 <td><b>Name</b></td>
                 <td><b>Created by</b></td>
                 <td><b>Updated</b></td>
+                <td><b></b></td>
             </tr>
         </thead>
         <tr *ngFor="let item of entities">
             <td>{{item.projectandname}}</td>
             <td>{{item._createdby}}</td>
             <td>{{item._modified | timeSince}}</td>
+            <td>
+                <a routerLink="/RPAWorkflow/{{item._id}}">Tasks</a>
+            </td>
         </tr>
     </table>
 </div>

@@ -1,6 +1,5 @@
 <div *ngIf="entities" snInfiniteScroll (scrollEnd)="onScrollEnd()" [offset]="100" [disabled]="disabled">
     <h2>{{collection}}</h2> 
-    {{disabled}}
     <select [(ngModel)]="collection" (change)="loaddata(true)">
         <option *ngFor="let item of collections" [ngValue]="item">{{item}}</option>
     </select>

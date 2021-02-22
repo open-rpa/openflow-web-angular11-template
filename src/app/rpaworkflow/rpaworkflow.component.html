@@ -1,0 +1,28 @@
+<form (ngSubmit)="onSubmit()" name="form1">
+    <div *ngIf="entity">
+        <div class="form-group">
+            <label [attr.for]="entity.name">{{entity.name}}</label>
+        </div>
+        <div class="form-group">
+            <label>Robot</label>
+            <select [(ngModel)]="user" name="user">
+                <option *ngFor="let item of users" [ngValue]="item" name="name">{{item.name}}</option>
+            </select>
+        </div>
+        <div class="form-group" *ngFor="let item of entity.Parameters">
+            <label [attr.for]="item.name">{{item.name}}</label>
+            <input type="text" [(ngModel)]="arguments[item.name]" [ngModelOptions]="{standalone: true}" />
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success" translate
+                lib="web">invoke</button>
+            timeout: <input [(ngModel)]="timeout" class="form-control input-md" [ngModelOptions]="{standalone: true}" />
+        </div>
+    </div>
+</form>
+<pre *ngIf="errormessage" class="alert alert-danger">
+    {{errormessage}}
+</pre>
+<pre *ngIf="messages" class="alert alert-primary">
+    {{messages}}
+</pre>
