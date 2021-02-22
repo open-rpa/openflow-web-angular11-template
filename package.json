@@ -25,7 +25,7 @@
     "@angular/platform-browser": "~11.2.1",
     "@angular/platform-browser-dynamic": "~11.2.1",
     "@angular/router": "~11.2.1",
-    "@openiap/ng-openflow-auth": "file:../ng-openflow-auth/dist/openiap/ng-openflow-auth",
+    "@openiap/ng-openflow-auth": "0.0.6",
     "@openiap/openflow-api": "^1.0.59",
     "@thisissoon/angular-infinite-scroll": "^2.1.0",
     "@thisissoon/angular-timesince": "^2.1.0",
