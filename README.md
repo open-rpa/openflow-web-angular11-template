@@ -23,7 +23,7 @@ Then to run the project type
 ng serv
 ```
 
-You set the openflow you want to talk with inside /src/app/authCodeFlowConfig.ts
+You set the openflow you want to talk with inside [/src/app/authCodeFlowConfig.ts](src/app/authCodeFlowConfig.ts)
 
 here you also need to configure the oidc client you configured inside that openflow
 
