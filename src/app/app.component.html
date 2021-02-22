@@ -1,0 +1,19 @@
+<div class="toolbar" role="banner">
+  <div *ngIf="openflowAuthService.isSignedIn">
+    <img width="20" alt="Logo"
+      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAARCAIAAABbzbuTAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACBSURBVDhPxY/BEYAgDAQtzj8N8KcXuqBSPLgYMphx4st9RdgFPPpHfgxyzuek1ipLEz+gCkopsnTjBHq2tVtrHJyANtDHYMAn57cAQKUNuOsEKSUaFryTu3ug523I9hZYW+/Rs8kKrI1ZVh9IELTBCOI2GIG4ARusGyI2WD8dovcL01GdYf7eC9kAAAAASUVORK5CYII=" />
+    <a routerLink="/">Tasks</a> |
+    <a routerLink="/Entities">Entities</a> |
+    <a routerLink="/Users">Users</a> |
+    <a routerLink="/RPAWorkflows">RPAWorkflows</a> |    
+    <a (click)="openflowAuthService.Logout()" href="#">Logout</a>
+  </div>
+  <div *ngIf="!openflowAuthService.isSignedIn">
+    <img width="20" alt="Logo"
+      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAARCAIAAABbzbuTAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACBSURBVDhPxY/BEYAgDAQtzj8N8KcXuqBSPLgYMphx4st9RdgFPPpHfgxyzuek1ipLEz+gCkopsnTjBHq2tVtrHJyANtDHYMAn57cAQKUNuOsEKSUaFryTu3ug523I9hZYW+/Rs8kKrI1ZVh9IELTBCOI2GIG4ARusGyI2WD8dovcL01GdYf7eC9kAAAAASUVORK5CYII=" />
+    <a *ngIf="!openflowAuthService.hasToken" (click)="openflowAuthService.Login()" href="#">Login</a>
+    <a *ngIf="openflowAuthService.hasToken" (click)="openflowAuthService.Logout()" href="#">| Logout</a>
+  </div>
+</div>
+
+<router-outlet></router-outlet>

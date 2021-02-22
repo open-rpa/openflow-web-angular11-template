@@ -1,0 +1,7 @@
+<div *ngIf="entities && openflowAuthService.isSignedIn">
+    <h2>Tasks</h2> 
+    <input type="checkbox" [(ngModel)]="showcompleted" (change)="loaddata()"> Show completed
+    <li *ngFor="let item of entities">
+        <span class="badge">{{item.state}}</span>: {{item.name}}
+    </li>
+</div>

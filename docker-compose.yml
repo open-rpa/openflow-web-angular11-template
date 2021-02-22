@@ -1,0 +1,14 @@
+version: '3.5'
+services:
+  angular-service:
+    container_name: angularcontainer
+    build: .
+    # image: openiap/openflow-web-angular11-template
+    ports:
+      - '80:80'
+    environment:
+      - openflowdomain=app.openiap.io
+
+# docker-compose up --build -d
+# docker-compose up -d
+# docker-compose down

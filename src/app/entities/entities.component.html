@@ -1,0 +1,25 @@
+<div *ngIf="entities" snInfiniteScroll (scrollEnd)="onScrollEnd()" [offset]="100" [disabled]="disabled">
+    <h2>{{collection}}</h2> 
+    {{disabled}}
+    <select [(ngModel)]="collection" (change)="loaddata(true)">
+        <option *ngFor="let item of collections" [ngValue]="item">{{item}}</option>
+    </select>
+    <table>
+        <thead>
+            <tr>
+                <td><b>Name</b></td>
+                <td><b>Type</b></td>
+                <td><b>Created by</b></td>
+                <td><b>Created</b></td>
+                <td><b>Updated</b></td>
+            </tr>
+        </thead>
+        <tr *ngFor="let item of entities">
+            <td>{{item.name}}</td>
+            <td>{{item._type}}</td>
+            <td>{{item._createdby}}</td>
+            <td>{{item._created | timeSince}}</td>
+            <td>{{item._modified | timeSince}}</td>
+        </tr>
+    </table>
+</div>
