@@ -11,10 +11,11 @@ git clone https://github.com/open-rpa/openflow-web-angular11-template.git
 cd openflow-web-angular11-template
 ```
 
-make sure you have angular cli installed
+make sure you have angular cli installed, then install all local packages
 
 ```powershell
 npm i -g @angular/cli 
+npm i
 ```
 
 Then to run the project type
@@ -27,7 +28,7 @@ You set the openflow you want to talk with inside [/src/app/authCodeFlowConfig.t
 
 here you also need to configure the oidc client you configured inside that openflow
 
-In openflow go to #/OAuthClients and click Add OAuth client, give it a name and a clientid, secret should NOT be needed, then make sure "token_endpoint_auth_method" is set to "client_secret_post"
+In openflow go to #/OAuthClients and click Add OAuth client, give it a name and a clientid, secret should NOT be needed, then make sure "token_endpoint_auth_method" is set to "none"
 **Please make sure to set redirecturis and post_logout_redirect_uris before you go into production!**
 
 Once your ready to publish you project, make sure you have [docker](https://docs.docker.com/get-docker/) installed, then try and build your project and create a docker image with your project
