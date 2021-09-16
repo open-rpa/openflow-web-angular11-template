@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgOpenflowAuthService } from '@openiap/ng-openflow-auth';
-import { NoderedUtil } from '@openiap/openflow-api';
+import { NoderedUtil, WebSocketClient } from '@openiap/openflow-api';
 
 @Component({
   selector: 'app-entities',
@@ -27,11 +27,14 @@ export class EntitiesComponent implements OnInit {
   ngOnInit(): void {
     this.route.params
     this.openflowAuthService.onSignedin(async user => {
+      if (WebSocketClient.instance == null) {
+        WebSocketClient.instance = this.openflowAuthService.WebSocketClient() as any;
+      }
       this.loaddata();
     });
   }
   async loaddata(reset: boolean = false) {
-    if(reset) this.index = 0;
+    if (reset) this.index = 0;
     try {
       this.disabled = true;
       if (!this.openflowAuthService.isSignedIn) { console.log("Not connected/signed in"); return; }
