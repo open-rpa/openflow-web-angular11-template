@@ -27,9 +27,6 @@ export class EntitiesComponent implements OnInit {
   ngOnInit(): void {
     this.route.params
     this.openflowAuthService.onSignedin(async user => {
-      if (WebSocketClient.instance == null) {
-        WebSocketClient.instance = this.openflowAuthService.WebSocketClient() as any;
-      }
       this.loaddata();
     });
   }

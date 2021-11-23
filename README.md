@@ -21,7 +21,7 @@ npm i
 Then to run the project type
 
 ```powershell
-ng serv
+ng serve
 ```
 
 You set the openflow you want to talk with inside [/src/app/authCodeFlowConfig.ts](src/app/authCodeFlowConfig.ts)
