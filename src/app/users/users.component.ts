@@ -16,7 +16,7 @@ export class UsersComponent implements OnInit {
     this.openflowAuthService.onSignedin(async user => {
       try {
         // Get list of all users in openflow
-        this.entities = await NoderedUtil.Query("users", { "_type": "user" }, null, null, 100, 0, null as any);
+        this.entities = await NoderedUtil.Query({ collectionname: "users", query: { "_type": "user" } });
       } catch (error) {
         console.error(error);
       }

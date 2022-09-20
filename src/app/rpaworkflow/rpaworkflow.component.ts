@@ -20,26 +20,32 @@ export class RPAWorkflowComponent implements OnInit {
   }
   ngOnInit(): void {
     this.openflowAuthService.onSignedin(async user => {
-      this.queuename = await NoderedUtil.RegisterQueue(WebSocketClient.instance, "", async (data: QueueMessage, ack: any) => {
-        ack();
-        if (data.data.command == undefined && data.data.data != null) data.data = data.data.data;
-        this.messages += data.data.command + "\n";
-        if (data.data.command == "invokecompleted") {
-          this.arguments = data.data.data;
-        }
-        if (data.data.command == "invokefailed") {
-          if (data.data && data.data.data && data.data.data.Message) {
-            this.errormessage = data.data.data.Message;
-          } else {
-            this.errormessage = JSON.stringify(data.data);
+      this.queuename = await NoderedUtil.RegisterQueue({
+        websocket: WebSocketClient.instance,
+        queuename: "",
+        closedcallback: () => {
+
+        },
+        callback: async (data: QueueMessage, ack: any) => {
+          ack();
+          if (data.data.command == undefined && data.data.data != null) data.data = data.data.data;
+          this.messages += data.data.command + "\n";
+          if (data.data.command == "invokecompleted") {
+            this.arguments = data.data.data;
           }
-
+          if (data.data.command == "invokefailed") {
+            if (data.data && data.data.data && data.data.data.Message) {
+              this.errormessage = data.data.data.Message;
+            } else {
+              this.errormessage = JSON.stringify(data.data);
+            }
+          }
         }
-
       });
       console.log("Registered queue: " + this.queuename);
       await this.loaddata();
-      this.users = await NoderedUtil.Query("users", { $or: [{ _type: "user" }, { _type: "role", rparole: true }] }, null, null, 100, 0, null as any);
+      this.users = await NoderedUtil.Query(
+        { collectionname: "users", query: { $or: [{ _type: "user" }, { _type: "role", rparole: true }] } });
       this.users.forEach(user => {
         if (user._id == this.entity._createdbyid || user._id == this.entity._createdbyid) {
           this.user = user;
@@ -61,7 +67,7 @@ export class RPAWorkflowComponent implements OnInit {
       if (!this.openflowAuthService.isSignedIn) { console.log("Not connected/signed in"); return; }
       const basequery: any = { "_id": this.id };
       const baseprojection: any = { _type: 1, type: 1, name: 1, _created: 1, _createdby: 1, _createdbyid: 1, _modified: 1, projectandname: 1, Parameters: 1 };
-      const arr = await NoderedUtil.Query("openrpa", basequery, baseprojection, null, 1, 0, null as any);
+      const arr = await NoderedUtil.Query({ collectionname: "openrpa", query: basequery, projection: baseprojection });
       if (arr.length == 1) this.entity = arr[0];
     } catch (error) {
       console.error(error);
@@ -76,7 +82,7 @@ export class RPAWorkflowComponent implements OnInit {
           data: this.arguments
       }
       if (this.arguments === null || this.arguments === undefined) { this.arguments = {}; }
-      const result: any = await NoderedUtil.QueueMessage(WebSocketClient.instance, this.user._id, this.queuename, rpacommand, null as any, parseInt(this.timeout as any));
+      const result: any = await NoderedUtil.Queue({ websocket: WebSocketClient.instance, queuename: this.user._id, replyto: this.queuename, data: rpacommand, expiration: this.timeout });
       try {
           // result = JSON.parse(result);
       } catch (error) {

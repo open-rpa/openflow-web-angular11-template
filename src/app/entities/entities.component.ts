@@ -37,7 +37,7 @@ export class EntitiesComponent implements OnInit {
       if (!this.openflowAuthService.isSignedIn) { console.log("Not connected/signed in"); return; }
       const basequery: any = {};
       const baseprojection: any = { _type: 1, type: 1, name: 1, _created: 1, _createdby: 1, _modified: 1, projectandname: 1 };
-      this.entities = await NoderedUtil.Query(this.collection, basequery, baseprojection, null, this.loadBy, this.index, null as any);
+      this.entities = await NoderedUtil.Query({ collectionname: this.collection, query: basequery, projection: baseprojection, top: this.loadBy, skip: this.index });
       this.index = this.loadBy;
       this.disabled = false;
     } catch (error) {

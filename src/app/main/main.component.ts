@@ -32,7 +32,7 @@ export class MainComponent implements OnInit {
         basequery["$and"] = [{ state: { $ne: "completed" } }, { state: { $ne: "failed" } }];
         basequery.form = { $exists: true };
       }
-      this.entities = await NoderedUtil.Query("workflow_instances", basequery, null, null, 100, 0, null as any);
+      this.entities = await NoderedUtil.Query({ collectionname: "workflow_instances", query: basequery });
     } catch (error) {
       console.error(error);
     }
